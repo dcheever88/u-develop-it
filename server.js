@@ -1,3 +1,4 @@
+const mysql = require("mysql2");
 const express = require("express");
 
 const PORT = process.env.PORT || 3001;
@@ -7,7 +8,18 @@ const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-
+// connect to database
+const db = mysql.createConnection(
+    {
+        host: "localhost",
+        // Your MySQL username,
+        user: "root",
+        // Your MySQL password
+        password: "furyroad1",
+        database: "election"
+    },
+    console.log("connected to the election database")
+);
 
 // default response for any other request (not found)
 app.use((req, res) => {
